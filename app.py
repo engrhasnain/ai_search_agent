@@ -8,7 +8,8 @@ from langchain.callbacks import StreamlitCallbackHandler
 
 from dotenv import load_dotenv
 load_dotenv()
-groq_api_key = os.getenv("GROQ_API_KEY")
+#groq_api_key = os.getenv("GROQ_API_KEY")
+#groq_api_key = st.secrets["GROQ_API_KEY"]
 #sidebar settings
 arxiv_wrapper = ArxivAPIWrapper(top_k_results=1, doc_content_chars_max=200)
 arxiv = ArxivQueryRun(api_wrapper=arxiv_wrapper)
@@ -22,7 +23,7 @@ st.title("LangChain - Chat with Search Agents")
 
 #
 st.sidebar.title("Settings")
-api_key = st.sidebar.text_input("Enter your Groq API key", type="password")
+groq_api_key = st.sidebar.text_input("Enter your Groq API key", type="password")
 
 if "messages" not in st.session_state:
     st.session_state["messages"] = [

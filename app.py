@@ -50,7 +50,9 @@ if  prompt := st.chat_input(placeholder="What is Machine Learning?"):
         verbose = False)
     
     with st.chat_message("assistant"):
+        #response = search_agent.run(st.session_state.messages, callbacks=[st_cb])
         st_cb = StreamlitCallbackHandler(st.container(), expand_new_thoughts=False)
-        response = search_agent.run(st.session_state.messages, callbacks=[st_cb])
+        latest_prompt = st.session_state.messages[-1]["content"]
+        response = search_agent.run({"input": latest_prompt}, callbacks=[st_cb])
         st.session_state.messages.append({'role' : 'assistant', 'content' : response})
         st.write(response)
